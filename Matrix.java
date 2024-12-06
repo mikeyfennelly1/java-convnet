@@ -1,8 +1,8 @@
 public class Matrix {
-    private final Double[][] matrix;
+    private final int[][] matrix;
     private int XDimension, YDimension;
 
-    public Matrix(Double[][] rows) throws IllegalArgumentException {
+    public Matrix(int[][] rows) throws IllegalArgumentException {
         if (!isValidMatrix(rows))
             throw new IllegalArgumentException();
 
@@ -11,17 +11,11 @@ public class Matrix {
         this.YDimension = rows[0].length;
     }
 
-    public Matrix(int XDimension, int YDimension) throws IllegalArgumentException {
-        this.XDimension = XDimension;
-        this.YDimension = YDimension;
-        matrix = (Double[][]) new Object[XDimension][YDimension];
-    }
-
     /**
      * Given 'matrix', this checks if matrix dimensionality is valid,
      * i.e. num columns = num rows
      * */
-    private boolean isValidMatrix(Double[][] matrix) {
+    private boolean isValidMatrix(int[][] matrix) {
         boolean consistentRowSizes = true;
 
         if (!isRowLengthConsistent(matrix)) {
@@ -33,31 +27,31 @@ public class Matrix {
         return true;
     }
 
-    public int getXDimensionality(Double[][] matrix) {
+    public int getXDimensionality(int[][] matrix) {
         return this.XDimension;
     }
-    public int getYDimensionality(Double[][] matrix) {
+    public int getYDimensionality(int[][] matrix) {
         return this.YDimension;
     }
-    private int calcXDimensionality(Double[][] matrix) {
+    private int calcXDimensionality(int[][] matrix) {
         return matrix[0].length;
     }
-    private int calcYDimensionality(Double[][] matrix) {
+    private int calcYDimensionality(int[][] matrix) {
         return matrix.length;
     }
 
-    public Double[][] getMatrix() {
+    public int[][] getMatrix() {
         return this.matrix;
     }
 
     /**
      * Row length is consistent if row.length for all arrays in the matrix are equal
      * */
-    private boolean isRowLengthConsistent(Double[][] matrix) {
+    private boolean isRowLengthConsistent(int[][] matrix) {
         boolean rowLenIsConsistent = true;
         int prevRowLen = -1;
 
-        for (Double[] row : matrix) {
+        for (int[] row : matrix) {
             // for first encountered row there is no comparison
             if (prevRowLen == -1) {
                 prevRowLen = row.length;
@@ -71,12 +65,12 @@ public class Matrix {
         return rowLenIsConsistent;
     }
 
-    public java.lang.Double[][] getTranspose() {
+    public int[][] getTranspose() {
         // make the x the columns
         int x = this.getXDimensionality(matrix);
         int y = this.getYDimensionality(matrix);
 
-        java.lang.Double[][] transpose = new java.lang.Double[x][y];
+        int[][] transpose = new int[x][y];
 
         // Populate the transpose matrix
         for (int i = 0; i < x; i++) {
